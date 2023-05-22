@@ -2,12 +2,12 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #354649  ;
+  background-color: #354649;
 }
 
 label {
   font-weight: bold;
-  color: #FFFFFF;
+  color: #ffffff;
   margin-right: 5px;
   margin-left: 5px;
 }
@@ -16,17 +16,32 @@ select {
   border: 1px solid #ccc;
   border-radius: 5px;
   margin-right: 10px;
+  font-size: 20px;
 }
 
-table {
+#table {
   border-collapse: collapse;
   font-family: Arial, sans-serif;
   width: 100%;
-  
 }
 
 #blank {
   height: 40px;
+}
+
+#selection {
+  text-align: center;
+  margin: 10px 0;
+}
+
+button {
+  padding: 5px 10px;
+  font-size: 20px;
+  margin-left: 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 th,
@@ -34,9 +49,8 @@ td {
   border: 1px solid #000000;
   padding: 5px;
   text-align: center;
-  width: auto;
-  height: auto;
-  font-size: 10px;
+  font-size: 20px;
+  width: 15%;
   background-color: #ccc;
 }
 
@@ -82,48 +96,47 @@ tr[data-city="Black Market"] {
 }
 
 .navbar {
-    background-color: #333;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    
+  background-color: #333;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
 }
 .nav-text {
-    font-size: 24px;
-    font-weight: bold;
-  }
+  font-size: 24px;
+  font-weight: bold;
+}
 
-  .news {
-    color: pink;
-  }
-  
-  .nav-links {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-  }
-  
-  .nav-link {
-    color: white;
-    text-decoration: none;
-    padding: 10px;
-    margin: 0 5px;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-  }
-  
-  .nav-link:hover {
-    background-color: white;
-    color: #333;
-  }
+.news {
+  color: pink;
+}
 
-   .navbar-bg {
-    background-image: url('image/01.gif');
-    background-repeat: no-repeat;
-    animation: move-background 10s linear infinite;
-    background-size: contain;
-    background-position: center;
-  }
+.nav-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  margin: 0 5px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  background-color: white;
+  color: #333;
+}
+
+.navbar-bg {
+  background-image: url("image/01.gif");
+  background-repeat: no-repeat;
+  animation: move-background 10s linear infinite;
+  background-size: contain;
+  background-position: center;
+}
