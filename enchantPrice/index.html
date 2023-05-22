@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="enchantOption.js"></script>
+
+    <nav class="navbar navbar-bg">
+      <div class="nav-text">附魔價錢</div>
+      <ul class="nav-links">
+        <li><a href="../" class="nav-link">市場</a></li>
+        <li><a href="./" class="nav-link">附魔價錢</a></li>
+        <li><a href="../craftRecipe/" class="nav-link">製作費用</a></li>
+      </ul>
+    </nav>
+
+    <div id="app">
+      <div id="selection">
+        <label>城市</label>
+        <select id="city" v-model="selectedCity">
+          <option v-for="(cityName) in cities" :value="cityName">
+            {{cityName}}
+          </option>
+        </select>
+
+        <label>階級：</label>
+        <select id="item-tier" v-model="selectedTier">
+          <option value="">全部</option>
+          <option value="T4_">T4</option>
+          <option value="T5_">T5</option>
+          <option value="T6_">T6</option>
+          <option value="T7_">T7</option>
+          <option value="T8_">T8</option>
+        </select>
+
+        <button id="get" v-on:click="calculateEnchantPrice">附魔價格</button>
+      </div>
+    </div>
+
+    <div id="table"></div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>

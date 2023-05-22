@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="./itemType.js"></script>
+
+    <nav class="navbar navbar-bg">
+      <div class="nav-text">附魔價錢</div>
+      <ul class="nav-links">
+        <li><a href="./" class="nav-link">市場</a></li>
+        <li><a href="./enchantPrice/" class="nav-link">附魔價錢</a></li>
+        <li><a href="./craftRecipe/" class="nav-link">製作費用</a></li>
+      </ul>
+    </nav>
+
+    <div id="app">
+      <div id="selection">
+        <label>物品類別：</label>
+        <select id="item-class" v-model="selectedClass">
+          <option v-for="(Classname,value) in itemClassOption" :value="value">
+            {{Classname}}
+          </option>
+        </select>
+
+        <label>物品種類：</label>
+        <select id="item-type" v-model="selectedType">
+          <option
+            v-for="Typename in optionsByItemClass[selectedClass]"
+            :value="itemClassValues[Typename]"
+          >
+            {{Typename}}
+          </option>
+        </select>
+
+        <label>物品名稱：</label>
+        <select id="item-name" v-model="selectedName">
+          <option v-for="itemName in optionsByItemType[selectedType]">
+            {{itemName}}
+          </option>
+        </select>
+
+        <label>階級：</label>
+        <select id="item-tier" v-model="selectedTier">
+          <!-- <option value="">自動</option> -->
+          <option v-for="tier in 8" :value="`T${tier}_`">階級{{tier}}</option>
+        </select>
+
+        <label>附魔：</label>
+        <select id="item-enchant" v-model="selectedEnchant">
+          <option value="">附魔0</option>
+          <option v-for="enchant in 4" :value="enchant">附魔{{enchant}}</option>
+        </select>
+
+        <label>品質：</label>
+        <select id="item-quality" v-model="selectedQuality">
+          <option value="1">一般</option>
+          <option value="2">良好</option>
+          <option value="3">優秀</option>
+          <option value="4">卓越</option>
+          <option value="5">傑出</option>
+        </select>
+
+        <button id="getData" v-on:click="fetchData">查詢價格</button>
+      </div>
+    </div>
+
+    <div id="table"></div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="./tool.js"></script>
+  </body>
+</html>
