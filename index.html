@@ -66,9 +66,16 @@
 
         <button id="getData" v-on:click="fetchData">查詢價格</button>
       </div>
+      <div id="item">
+      <img id="itemImg" />
+      <button id="craftRecipe" v-on:click="checkCraftingRecipe(itemName)">
+        製作成本
+      </button>
     </div>
-    <div id="itemImg"></div>
-    <div id="table"></div>
+    </div>
+    
+    <div id="priceTable"></div>
+    <div id="craftTable"></div>
 
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="./tool.js"></script>

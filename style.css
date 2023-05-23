@@ -23,10 +23,11 @@ select {
   font-size: 20px;
 }
 
-#table {
+#priceTable {
   border-collapse: collapse;
   font-family: Arial, sans-serif;
   width: 100%;
+  margin-top: 50px;
 }
 
 th,
@@ -81,6 +82,10 @@ tr[data-city="Caerleon"] {
 tr[data-city="Black Market"] {
   background-color: rgb(30, 30, 30);
   color: rgb(220, 220, 220);
+}
+
+tr[data-city="Merlyns Rest"] {
+  background-color: rgb(40, 78, 44);
 }
 
 .navbar {
@@ -143,7 +148,10 @@ button {
   transition: all 0.3s ease;
 }
 
-#itemImg {
-  margin: 0 auto;
+#item {
   text-align: center;
+}
+
+#craftRecipe{
+  display: none;
 }

@@ -61,6 +61,7 @@ const vm = Vue.createApp({
 
               if (itemName.includes("RUNE")) {
                 itemName = itemName.replace("RUNE", "符文");
+                itemName = itemName.replace("Rune", "符文");
               } else if (itemName.includes("SOUL")) {
                 itemName = itemName.replace("SOUL", "精魂");
               } else if (itemName.includes("RELIC")) {

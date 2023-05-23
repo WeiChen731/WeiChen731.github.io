@@ -12,6 +12,8 @@ const vm = Vue.createApp({
       selectedTier: "T4_",
       selectedEnchant: "",
       selectedQuality: "1",
+      itemName: "",
+      recipeList : {},
     };
   },
   watch: {
@@ -24,7 +26,7 @@ const vm = Vue.createApp({
   },
   methods: {
     fetchData() {
-      this.clearTable();
+      this.clearPriceTable();
       let itemClass = this.selectedClass;
       let tier = this.selectedTier;
       let type = this.selectedType;
@@ -45,19 +47,22 @@ const vm = Vue.createApp({
           : type === "MATERIAL" || type === "RAW"
           ? `_LEVEL${enchant}@${enchant}`
           : `@${enchant}`;
-
-      let priceUrl = `https://east.albion-online-data.com/api/v2/stats/prices/${tier}${this.itemTypeValues[itemName]}${enchantString}.json?qualities=${quality}`;
+      let craftUrl = `https://gameinfo.albiononline.com/api/gameinfo/items/${tier}${this.itemTypeValues[itemName]}${enchantString}/data`;
+      fetch(craftUrl).then((res) => res.json()).then((data) =>{
+        console.log(data)
+      })
+      let priceUrl = `https://east.albion-online-data.com/api/v2/stats/prices/${this.itemName}.json?qualities=${quality}`;
       let historyUrl = `https://east.albion-online-data.com/api/v2/stats/history/${tier}${this.itemTypeValues[itemName]}${enchantString}.json?qualities=${quality}&time-scale=1`;
       let imgUrl = `https://render.albiononline.com/v1/item/${tier}${this.itemTypeValues[itemName]}${enchantString}.png`;
       Promise.all([
         fetch(priceUrl).then((res) => res.json()),
         fetch(historyUrl).then((res) => res.json()),
       ]).then((data) => {
-        let table = document.getElementById("table");
+        let table = document.getElementById("priceTable");
         table.classList.add("my-table");
-        const itemImg = document.createElement("img");
-        itemImg.src = imgUrl;
-        document.getElementById("itemImg").appendChild(itemImg);
+        let img = document.getElementById("itemImg");
+        img.src = imgUrl;
+        document.getElementById("craftRecipe").style.display = "inline-block";
 
         let headerRow = document.createElement("tr");
         let headers = [
@@ -163,7 +168,13 @@ const vm = Vue.createApp({
         }
       });
     },
-    clearTable() {
+    checkCraftingRecipe(itemName) {
+      
+      fetch(craftUrl).then((res) => res.json()).then((data) =>{
+        console.log(data)
+      })
+    },
+    clearPriceTable() {
       const existingImg = document.getElementById("itemImg");
       const existingTable = document.getElementById("table");
       if (existingTable) {
