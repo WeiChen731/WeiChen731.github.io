@@ -18,7 +18,7 @@ const vm = Vue.createApp({
 
       let headerRow = document.createElement("tr");
       let headers = [
-        "城市",
+        "名稱",
         "賣出最低價格",
         "賣出最低價格時間",
         "賣出最高價格",
@@ -41,8 +41,6 @@ const vm = Vue.createApp({
         let bodyTotal = 0;
         let oneHandTotal = 0;
         let twoHandTotal = 0;
-        let oneHandAll = 0;
-        let twoHandAll = 0;
         for (var j = 0; j < itemNameList.length; j++) {
           let tierString = tier === "" ? `T${i}_` : tier;
           let priceUrl = `https://east.albion-online-data.com/api/v2/stats/prices/${tierString}${itemNameList[j]}.json?locations=${city}`;
@@ -75,15 +73,16 @@ const vm = Vue.createApp({
               headers.slice(1).forEach((header) => {
                 let cell = document.createElement("td");
                 let content;
+                let date;
                 if (j == 0 || j == 1 || j == 2) {
                   if (header === "賣出最低價格") {
                     content = item.sell_price_min;
                   } else if (header === "賣出最低價格時間") {
-                    content = item.sell_price_min_date;
+                    date = item.sell_price_min_date;
                   } else if (header === "賣出最高價格") {
                     content = item.sell_price_max;
                   } else if (header === "賣出最高價格時間") {
-                    content = item.sell_price_max_date;
+                    date = item.sell_price_max_date;
                   } else if (header === "頭腳披風、副手") {
                     content = 48 * item.sell_price_min;
                     helmetTotal += content;
@@ -114,8 +113,25 @@ const vm = Vue.createApp({
                     content = helmetTotal * 4 + bodyTotal + twoHandTotal;
                   }
                 }
+                const utcDate = new Date(date);
+                const offset = 8; // UTC+8 timezone offset
+                const localTimestamp = new Date(
+                  utcDate.getTime() + offset * 60 * 60 * 1000
+                );
+                const time = localTimestamp.toLocaleString("en-US", {
+                  month: "numeric",
+                  day: "numeric",
+                  hour: "numeric",
+                  minute: "numeric",
+                  hour12: false,
+                });
 
-                cell.textContent = content;
+                cell.textContent = header.includes("時間") &&  j != 3 && j != 4
+                  ? time != "1/1, 08:00"
+                    ? time
+                    : "無資料"
+                  : content;
+                // cell.textContent = content;
 
                 row.appendChild(cell);
               });
