@@ -48,12 +48,16 @@ const vm = Vue.createApp({
 
       let priceUrl = `https://east.albion-online-data.com/api/v2/stats/prices/${tier}${this.itemTypeValues[itemName]}${enchantString}.json?qualities=${quality}`;
       let historyUrl = `https://east.albion-online-data.com/api/v2/stats/history/${tier}${this.itemTypeValues[itemName]}${enchantString}.json?qualities=${quality}&time-scale=1`;
+      let imgUrl = `https://render.albiononline.com/v1/item/${tier}${this.itemTypeValues[itemName]}${enchantString}.png`;
       Promise.all([
         fetch(priceUrl).then((res) => res.json()),
         fetch(historyUrl).then((res) => res.json()),
       ]).then((data) => {
         let table = document.getElementById("table");
         table.classList.add("my-table");
+        const itemImg = document.createElement("img");
+        itemImg.src = imgUrl;
+        document.getElementById("itemImg").appendChild(itemImg);
 
         let headerRow = document.createElement("tr");
         let headers = [
@@ -160,10 +164,13 @@ const vm = Vue.createApp({
       });
     },
     clearTable() {
+      const existingImg = document.getElementById("itemImg");
       const existingTable = document.getElementById("table");
       if (existingTable) {
-        const table = document.getElementById("table");
-        table.innerHTML = "";
+        existingTable.innerHTML = "";
+      }
+      if (existingImg) {
+        existingImg.innerHTML = "";
       }
     },
   },
