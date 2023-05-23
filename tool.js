@@ -47,7 +47,7 @@ const vm = Vue.createApp({
           : type === "MATERIAL" || type === "RAW"
           ? `_LEVEL${enchant}@${enchant}`
           : `@${enchant}`;
-      let craftUrl = `https://gameinfo.albiononline.com/api/gameinfo/items/${tier}${this.itemTypeValues[itemName]}${enchantString}/data`;
+      let craftUrl = `https://gameinfo.albiononline.com/api/gameinfo/items/T8_MEAL_STEW/data`;
       fetch(craftUrl).then((res) => res.json()).then((data) =>{
         console.log(data)
       })
@@ -62,7 +62,7 @@ const vm = Vue.createApp({
         table.classList.add("my-table");
         let img = document.getElementById("itemImg");
         img.src = imgUrl;
-        document.getElementById("craftRecipe").style.display = "inline-block";
+        // document.getElementById("craftRecipe").style.display = "inline-block";
 
         let headerRow = document.createElement("tr");
         let headers = [
