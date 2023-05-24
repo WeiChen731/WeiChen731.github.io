@@ -51,13 +51,14 @@ const vm = Vue.createApp({
       fetch(craftUrl).then((res) => res.json()).then((data) =>{
         console.log(data)
       })
-      let priceUrl = `https://east.albion-online-data.com/api/v2/stats/prices/${this.itemName}.json?qualities=${quality}`;
+      let priceUrl = `https://east.albion-online-data.com/api/v2/stats/prices/${tier}${this.itemTypeValues[itemName]}${enchantString}.json?qualities=${quality}`;
       let historyUrl = `https://east.albion-online-data.com/api/v2/stats/history/${tier}${this.itemTypeValues[itemName]}${enchantString}.json?qualities=${quality}&time-scale=1`;
       let imgUrl = `https://render.albiononline.com/v1/item/${tier}${this.itemTypeValues[itemName]}${enchantString}.png`;
       Promise.all([
         fetch(priceUrl).then((res) => res.json()),
         fetch(historyUrl).then((res) => res.json()),
       ]).then((data) => {
+        console.log(priceUrl);
         let table = document.getElementById("priceTable");
         table.classList.add("my-table");
         let img = document.getElementById("itemImg");
@@ -94,6 +95,7 @@ const vm = Vue.createApp({
           row.appendChild(cityNameCell);
 
           let cityItems = data[0].filter((item) => item.city === city);
+          console.log(cityItems);
 
           let itemdata = data[1].find((item) => item.location === city)
             ? data[1].find((item) => item.location === city)
@@ -176,7 +178,7 @@ const vm = Vue.createApp({
     },
     clearPriceTable() {
       const existingImg = document.getElementById("itemImg");
-      const existingTable = document.getElementById("table");
+      const existingTable = document.getElementById("priceTable");
       if (existingTable) {
         existingTable.innerHTML = "";
       }
